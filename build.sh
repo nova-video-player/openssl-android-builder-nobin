@@ -21,6 +21,7 @@ fi
 source ../../AVP/android-setup-light.sh
 
 LOCAL_PATH=$($READLINK -f .)
+mkdir -p ../prebuilt/openssl
 PREBUILT_DIR=$($READLINK -f ../prebuilt/openssl)
 
 ANDROID_API=21

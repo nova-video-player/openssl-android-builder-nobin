@@ -2,6 +2,7 @@
 
 source ../../AVP/android-setup-light.sh
 
+mkdir -p ../prebuilt/openssl
 PREBUILT_DIR=$($READLINK -f ../prebuilt/openssl)
 
 # skip if all prebuilt libs already exist
