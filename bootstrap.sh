@@ -1,5 +1,18 @@
 #!/bin/bash
 
+source ../../AVP/android-setup-light.sh
+
+PREBUILT_DIR=$($READLINK -f ../prebuilt/openssl)
+
+# skip if all prebuilt libs already exist
+if [ -f "${PREBUILT_DIR}/dist-armeabi-v7a/lib/libcrypto.a" ] && \
+   [ -f "${PREBUILT_DIR}/dist-arm64-v8a/lib/libcrypto.a" ] && \
+   [ -f "${PREBUILT_DIR}/dist-x86/lib/libcrypto.a" ] && \
+   [ -f "${PREBUILT_DIR}/dist-x86_64/lib/libcrypto.a" ]; then
+  echo "All openssl prebuilt libs already exist, skipping"
+  exit 0
+fi
+
 for ARCH in arm arm64 x86 x86_64
 do
   case "${ARCH}" in

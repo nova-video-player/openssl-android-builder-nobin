@@ -23,12 +23,6 @@ source ../../AVP/android-setup-light.sh
 LOCAL_PATH=$($READLINK -f .)
 PREBUILT_DIR=$($READLINK -f ../prebuilt/openssl)
 
-if [ ! -d openssl.git ]; then
-#  git clone https://github.com/openssl/openssl openssl.git --bare --depth=1 -b OpenSSL_1_1_1w
-  git clone https://github.com/openssl/openssl openssl.git --depth=1 -b openssl-3.5.5
-fi
-
-OPENSSL_BARE_PATH=$($READLINK -f openssl.git)
 ANDROID_API=21
 
 ARCH_CONFIG_OPT=
@@ -60,6 +54,13 @@ if [ -f "${PREBUILT_DIR}/dist-${ABI}/lib/libcrypto.a" ]; then
   echo "Already built for ${ABI}"
   exit 0
 fi
+
+if [ ! -d openssl.git ]; then
+#  git clone https://github.com/openssl/openssl openssl.git --bare --depth=1 -b OpenSSL_1_1_1w
+  git clone https://github.com/openssl/openssl openssl.git --depth=1 -b openssl-3.5.5
+fi
+
+OPENSSL_BARE_PATH=$($READLINK -f openssl.git)
 
 OPENSSL_DIR="$(mktemp -d)"
 #OPENSSL_DIR="$PWD/openssl-$ABI"
